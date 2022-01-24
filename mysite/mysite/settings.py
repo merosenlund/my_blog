@@ -122,4 +122,4 @@ STATIC_URL = "/static/"
 
 
 # Write emails to the console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
