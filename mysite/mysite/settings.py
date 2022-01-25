@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
     "blog.apps.BlogConfig",
     "taggit",
 ]
@@ -124,3 +126,7 @@ STATIC_URL = "/static/"
 
 # Write emails to the console
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+# Site id
+SITE_ID = 1
