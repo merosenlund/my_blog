@@ -26,10 +26,13 @@ def post_list(request, tag_slug=None):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, "blog/post/list.html", {"posts": posts, "page": page, 'tag': tag})
+    return render(
+        request, "blog/post/list.html", {"posts": posts, "page": page, "tag": tag}
+    )
 
 
 def post_detail(request, year, month, day, post):
+    # breakpoint()
     post = get_object_or_404(
         Post,
         slug=post,
@@ -38,6 +41,7 @@ def post_detail(request, year, month, day, post):
         publish__month=month,
         publish__day=day,
     )
+    # breakpoint()
     # List of active comments for this post
     comments = post.comments.filter(active=True)
     new_comment = None
@@ -53,11 +57,11 @@ def post_detail(request, year, month, day, post):
     else:
         comment_form = CommentForm()
     # List of similar posts
-    post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = Post.published.filter(tags__in=post_tags_ids)\
-        .exclude(id=post.id)
-    similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
-        .order_by('-same_tags', '-publish')[:4]
+    post_tags_ids = post.tags.values_list("id", flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count("tags")).order_by(
+        "-same_tags", "-publish"
+    )[:4]
     return render(
         request,
         "blog/post/detail.html",
