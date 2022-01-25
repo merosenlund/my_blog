@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.sitemaps",
+    "django.contrib.postgres",
     "blog.apps.BlogConfig",
     "taggit",
 ]
@@ -84,7 +85,7 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'blog',
+        "NAME": "blog",
         "USER": os.environ.get("db_user"),
         "PASSWORD": os.environ.get("db_password"),
     }
